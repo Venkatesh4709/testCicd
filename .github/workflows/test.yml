@@ -44,4 +44,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: jmeter-results
-          path: src/test/jmeter/results/
+          path: MAVEN Test project 1/src/test/jmeter/results/
