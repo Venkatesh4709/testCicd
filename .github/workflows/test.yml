@@ -33,7 +33,7 @@ jobs:
       - name: Run JMeter Test Plan
         run: |
           mkdir -p src/test/jmeter/results
-          jmeter -n -t src/test/jmeter/maventest1.jmx -l src/test/jmeter/results/test1.jtl -e -o src/test/jmeter/results/html-report
+          jmeter -n -t src/test/jmeter/maventest1.jmx -l src/test/jmeter/results/test1.jtl
 
       # Step 5: Upload Test Results as Artifacts
       - name: Upload Test Results
