@@ -1,0 +1,55 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>project</groupId>
+    <artifactId>myproject</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+ 
+    <build>
+        <plugins>
+            <!-- JMeter Plugin for Running Tests -->
+            <plugin>
+                <groupId>com.lazerycode.jmeter</groupId>
+                <artifactId>jmeter-maven-plugin</artifactId>
+                <version>2.9.0</version>
+                <configuration>
+                    <resultsFileFormat>csv</resultsFileFormat>
+                    <testResultsTimestamp>false</testResultsTimestamp> 
+                    <resultsDirectory>${project.basedir}/target/jmeter/results</resultsDirectory>
+                    <generateReports>true</generateReports>
+                    <reportDirectory>${project.basedir}/target/jmeter/reports</reportDirectory>
+                    <jMeterTestFile>src/test/jmeter/maventest1.jmx</jMeterTestFile>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>jmeter-tests</id>
+                        <goals>
+                            <goal>jmeter</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+ 
+            <!-- JMeter Lightning Plugin for SLA verification -->
+            <plugin>
+                <groupId>uk.co.automatictester</groupId>
+                <artifactId>jmeter-lightning-maven-plugin</artifactId>
+                <version>2.4.0</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>lightning</goal>
+                        </goals>
+                        <configuration>
+                            <mode>verify</mode>
+                            <testSetXml>${project.basedir}/src/test/resources/verification.xml</testSetXml>
+                            <jmeterCsv>${project.basedir}/target/jmeter/results/maventest1.csv</jmeterCsv>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
